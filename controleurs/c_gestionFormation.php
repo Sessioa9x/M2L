@@ -2,6 +2,11 @@
 $action = $_REQUEST['action'];
 $numformation = "";
 $domaine = "";$nomC=""; $contenuC ="";$coutC = ""; $objectifC="";
+if (isset($_REQUEST["messages"])) 
+{
+	$message = $_REQUEST["messages"];
+	include("vues/v_message.php");
+}
 switch ($action) {
 	case 'voirFormations':
 	{
@@ -62,8 +67,10 @@ switch ($action) {
 	case 'creerFormation':
 	{
 		$domaineC =$_REQUEST['domainec']; $nomC =$_REQUEST['nomForm']; $contenuC =$_REQUEST['contenu'];$coutC= $_REQUEST['cout']; $objectifC =$_REQUEST['objectif'];
+		$message = "Evitez les caractére spéciaux s'il vous plaît";
+		$pdo->creerFormation($domaineC,$nomC,$contenuC,$coutC,$objectifC);
 
-		$crea = $pdo->creerFormation($domaineC,$nomC,$contenuC,$coutC,$objectifC);
+		
 		$lesDomaines = $pdo->getLesDomaines();
 		$lesFormations = $pdo->getLesFormations();
 		include("vues/v_gestionFormation.php");

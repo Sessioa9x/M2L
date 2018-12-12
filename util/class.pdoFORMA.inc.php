@@ -126,7 +126,7 @@ class PdoFORMA
 		$ligne = $res->fetch();
 		$bool = true;
 
-		if ($ligne['ID_DOMAINE'] == $id_domaine && $ligne['NOM'] == $nom && $ligne['CONTENU'] == $contenu && $ligne['COUT'] == $cout && $ligne['OBJECTIF'] == $objectif) 
+		if ($ligne['ID_DOMAINE'] == $id_domaine && $ligne['NOM'] == $nom && $ligne['CONTENU'] == $contenu && $ligne['COUT'] == $cout && $ligne['OBJECTIF'] == $objectif ) 
 		{
 			$bool = false;
 		}
@@ -141,9 +141,14 @@ class PdoFORMA
 
 	public function creerFormation($id_domaine,$nom,$contenu,$cout,$objectif)
 	{
+	
 
-		$reqcreaform = "insert into formation values(NULL,$id_domaine,'$nom','$contenu',$cout,'$objectif');";
-		$resultcrea = PdoFORMA::$monPdo->query($reqcreaform) or die ("erreur crea ; $reqcreaform");
+			
+			$reqcreaform = "insert into formation values(NULL,$id_domaine,'$nom','$contenu',$cout,'$objectif');";
+
+			$resultcrea = PdoFORMA::$monPdo->exec($reqcreaform) or die (header("Location: index.php?uc=gestionFormation&messages=Evitez les caractére spéciaux s'il vous plaît &action=voirFormations")   );	
+		 
+		
 	}
 
 	public function supprimerUneFormation($numformation)
