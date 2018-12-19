@@ -8,7 +8,7 @@ include("vues/v_menu.php");
 
 if (!isset($_REQUEST['uc'])) 
 {
-	$uc = 'accueil';
+	$uc = 'formconnexion';
 }
 else
 {
@@ -16,18 +16,34 @@ else
 }
 $pdo = PdoFORMA::getPdoFORMA();
 switch ($uc) {
+	case 'allerconnexion':
+		{include("controleurs/c_connexion.php");break;}
+
+	case 'formconnexion':
+		{include("vues/v_connexion.php");break;}
+
 	case 'accueil':
-		{include("vues/v_accueil.php");break;}
+		{
+			if (isset($_SESSION['ok']) && $_SESSION['ok'] == "admin" || $_SESSION['ok'] == "participant") 
+			{
+				
+     			include("vues/v_accueil.php");
+			}
+			else
+			{
+				header("Location:index.php?uc=formconnexion");
+			}
+			
+			break;}
 	
 	case 'voirFormation' :
 		{include("controleurs/c_voirFormation.php");break;}
 
 	case 'gestionFormation':
 		{include("controleurs/c_gestionFormation.php");break;}
+
+	case 'gestionSession':
+		{include("controleurs/c_gestionSession.php");break;}
 			
 }
-
-
-
-
 ?>

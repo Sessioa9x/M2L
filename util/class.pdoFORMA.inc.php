@@ -85,10 +85,18 @@ class PdoFORMA
 		return $leslignes;
 	}
 
+	public function getLesLieux()
+	{
+		$req = "select * from lieu_formation";
+		$res = PdoFORMA::$monPdo->query($req);
+		$leslignes = $res->fetchAll();
+		return $leslignes;
+	}
+
 /**
- * Retourne toutes les sessions de formation sous forme d'un tableau associatif
+ * Affiche toutes les Formation sous forme d'un tableau
  *
- * @return le tableau associatif des sessions 
+ *
 */
 	public function affichageFormation()
 	{
@@ -140,15 +148,9 @@ class PdoFORMA
 	}
 
 	public function creerFormation($id_domaine,$nom,$contenu,$cout,$objectif)
-	{
-	
-
-			
+	{	
 			$reqcreaform = "insert into formation values(NULL,$id_domaine,'$nom','$contenu',$cout,'$objectif');";
-
-			$resultcrea = PdoFORMA::$monPdo->exec($reqcreaform) or die (header("Location: index.php?uc=gestionFormation&messages=Evitez les caractére spéciaux s'il vous plaît &action=voirFormations")   );	
-		 
-		
+			$resultcrea = PdoFORMA::$monPdo->exec($reqcreaform) or die (header("Location: index.php?uc=gestionFormation&messages=Evitez les caractére spéciaux s'il vous plaît &action=voirFormations"));
 	}
 
 	public function supprimerUneFormation($numformation)
@@ -158,6 +160,52 @@ class PdoFORMA
 
 	}
 
+	public function connexion($loginsaisie,$mdpsaisie)
+	{
+		
+		$req = "select mdp_admin from administrateur where util_admin = '$loginsaisie'";
+		$res = PdoFORMA::$monPdo->query($req);
+		$ligne = $res->fetch();
+
+		$mdpbdd = $ligne['mdp_admin'];
+
+		
+			$req = "select mdp from participant where nom = '$loginsaisie'";
+			$res = PdoFORMA::$monPdo->query($req);
+			$ligne = $res->fetch();
+			$mdpbdd2 = $ligne['mdp'];
+		
+		
+
+
+		if ($mdpsaisie != $mdpbdd )
+		{
+			if ($mdpsaisie != $mdpbdd2) 
+			{
+				$message = "Vous ete un imposteur !!! ";
+				include("vues/v_message.php");
+			}
+			else
+			{
+				$_SESSION['ok'] = "participant";
+				header("Location:index.php?uc=accueil");
+			}
+			
+		}
+		else
+		{
+			
+			$_SESSION['ok'] = "admin";
+			header("Location:index.php?uc=accueil");
+		}
+
+		
+	}
+
+	public function ajouterSession()
+	{
+		
+	}
 
 
 }

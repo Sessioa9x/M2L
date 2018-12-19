@@ -79,14 +79,6 @@ switch ($action) {
 		break;
 	}
 
-	case 'voirSessions':
-	{
-		$lesFormations = $pdo->getLesFormations();
-		$lesSessions = $pdo->getLesSessions();
-		include("vues/v_gestionSession.php");
-		include("vues/v_creaSession.php");
-		break;
-	}
 		
 		
 	

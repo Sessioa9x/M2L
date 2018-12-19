@@ -22,25 +22,20 @@
 	</select></td>
 	</tr>
 	<tr>
-		<td>Nom de la formation : </td><td><input class="form-control"  id="nom"  type="text" name="nom" value="<?=$nom ?>"></td>
+		<td>Nom de la formation : </td><td><input class="form-control"  id="nom"  type="text" name="nom" value="<?=$nom ?>" required></td>
 	</tr>
 	<tr>
-		<td>Contenu de la formation : </td><td><textarea class="form-control" id="contenu" rows="3" type="textarea" name="contenu"> <?=$contenu ?></textarea></td>
+		<td>Contenu de la formation : </td><td><textarea class="form-control" id="contenu" rows="3" type="textarea" name="contenu" required> <?=$contenu ?></textarea></td>
 	</tr>
 	<tr>
-		<td>Cout de la formation : : </td><td><input class="form-control" id="cout" type="text" name="cout" value="<?=$cout ?>"></td>
+		<td>Cout de la formation : : </td><td><input class="form-control" id="cout" type="text" name="cout" value="<?=$cout ?>" required></td>
 	</tr>
 	<tr>
-		<td>Objectif de la formation : </td><td><input class="form-control" id="objectif" type="text" name="objectif"  value="<?=$objectif ?>"></td>
+		<td>Objectif de la formation : </td><td><input class="form-control" id="objectif" type="text" name="objectif"  value="<?=$objectif ?>" required></td>
 	</tr>
 	<tr>
 		<td><input class="btn btn-primary" type="submit" value="Valider" name="valider"></td><td></td>
 	</tr>
 	
-	 
-
-	
-	
-
 </form>
 </table>

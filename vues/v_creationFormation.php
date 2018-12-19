@@ -42,3 +42,10 @@
 </form>
 
 </table>
+<br>
+<?php 
+$num = 1.9;
+echo $num . "<br>";
+$num += 0.1;
+echo $num;
+ ?>
